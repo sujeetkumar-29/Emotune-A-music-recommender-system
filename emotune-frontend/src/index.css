@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* --- Type --- */
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* --- Brand (amethyst / dusk) --- */
+  --color-brand-50: #f2f0ff;
+  --color-brand-100: #e4e0ff;
+  --color-brand-300: #b3a7ff;
+  --color-brand-400: #9b8afb;
+  --color-brand-500: #6c5ce7;
+  --color-brand-600: #5641d1;
+  --color-brand-700: #4432a8;
+  --color-brand-900: #241f4d;
+
+  /* --- Warm accent, used sparingly (waveform gradient end, CTAs) --- */
+  --color-ember-400: #ffab7a;
+  --color-ember-500: #ff8b5e;
+  --color-ember-600: #f2703a;
+
+  /* --- Neutral / surfaces --- */
+  --color-ink-950: #0e0c17;
+  --color-ink-900: #14121f;
+  --color-ink-800: #1e1b2e;
+  --color-ink-700: #2a2640;
+  --color-ink-600: #3a3457;
+  --color-mist-50: #faf8ff;
+  --color-mist-100: #f1eeff;
+  --color-mist-200: #e3dffa;
+  --color-mist-700: #4b4468;
+  --color-mist-900: #241f3d;
+
+  /* --- Emotion palette (semantic, distinct from brand) --- */
+  --color-emotion-happy: #ffc857;
+  --color-emotion-sad: #5b8def;
+  --color-emotion-angry: #ef5b5b;
+  --color-emotion-surprise: #f45b9e;
+  --color-emotion-fear: #7c83fd;
+  --color-emotion-disgust: #8baa3c;
+  --color-emotion-neutral: #9ca3af;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-mist-50 text-mist-900 dark:bg-ink-900 dark:text-mist-100;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-400);
+    color: white;
+  }
+
+  /* Visible keyboard focus everywhere, not just on inputs */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .font-mono-data {
+    font-family: var(--font-mono);
+  }
+
+  .bg-grain {
+    background-image: radial-gradient(var(--color-brand-500) 0.5px, transparent 0.5px);
+    background-size: 18px 18px;
+  }
+}
+
+/* --- Signature element: emotion waveform / equalizer --- */
+@keyframes wave-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.wave-bar {
+  animation: wave-bounce 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-bar {
+    animation: none;
+    transform: scaleY(0.7);
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

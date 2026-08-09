@@ -1,0 +1,26 @@
+.env 
+# env
+  .env
+  .env.local
+  **/.env
+
+  # python
+  __pycache__/
+  *.pyc
+  venv/
+  .venv/
+
+  # node
+  node_modules/
+  dist/
+  .vite/
+
+  # models (see Git LFS note below)
+  # *.keras
+  # *.h5
+
+  # OS
+  .DS_Store
+  Thumbs.dbvenv/
+__pycache__/
+*.pyc
